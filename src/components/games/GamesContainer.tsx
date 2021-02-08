@@ -15,7 +15,7 @@ function GamesContainer() {
     return (
         <ul>
             {games && games.map(game =>
-            <li>{game.id} - {game.teamHome} vs {game.teamAway}</li>
+                <li>{game.id} - {game.datetime} - {game.teamHome} vs {game.teamAway}</li>
             )}
         </ul>
     )

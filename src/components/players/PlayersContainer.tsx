@@ -2,7 +2,7 @@ import React from "react";
 
 import {Api} from "../services/api";
 import {PlayerJsonld} from "../commons/model";
-import nProgress from "nprogress";
+import {Card} from "antd";
 
 
 function PlayersContainer() {
@@ -14,13 +14,19 @@ function PlayersContainer() {
         })
     }, [])
     return (
-        <ul>
-            {players && players.map(player =>
-                <li>{player.id} - {player.name}</li>
-            )}
-        </ul>
+        <Card
+            title="Players"
+            extra={<a href="#">More</a>}>
+            <ul>
+                {players && players.map(player =>
+                    <li>{player.id} - {player.name}</li>
+                )}
+            </ul>
+        </Card>
+
     )
 }
 
-
 export default PlayersContainer;
+
+
