@@ -1,54 +1,57 @@
 import React from "react";
 import {Api} from "./services/api";
 import {Layout} from "antd";
-import {Content, Footer, Header} from "antd/es/layout/layout";
-import HeaderNavigation from "./components/HeaderNavigation";
+import {Content, Header} from "antd/es/layout/layout";
+import HeaderNavigation from "./commons/components/HeaderNavigation";
 import {Route, Switch} from "react-router";
-import GamesContainer from "./components/GamesContainer";
-import PlayersContainer from "./components/PlayersContainer";
-import TeamsContainer from "./components/TeamsContainer";
+import {GameJsonld, PlayerJsonld, TeamJsonld} from "./commons/model";
+import HomeContainer from "./components/HomeContainer";
+import TeamsContainer from "./components/teams/TeamsContainer";
+import GamesContainer from "./components/games/GamesContainer";
+import PlayersContainer from "./components/players/PlayersContainer";
 
-
+export interface IRoutes {
+    component: any,
+    exactMatch?: boolean,
+    label: string,
+    path: string,
+    routePath?: string,
+    displayMenu?: boolean
+}
 
 function AppRoot() {
-    const clickMenu = (e:any) => {
-        console.log(e)
-    }
+
+    const [routes] = React.useState<IRoutes[]>([
+        { path: '/', component: <HomeContainer /> , label: 'Home', exactMatch: true, displayMenu:true },
+        { path: '/teams', component: <TeamsContainer  />, label: 'Teams', exactMatch: true, displayMenu:true },
+        { path: '/games', component: <GamesContainer />, label: 'Games', exactMatch: true, displayMenu:true },
+        { path: '/players', component: <PlayersContainer />, label: 'Players', exactMatch: true, displayMenu:true },
+        // { path: '/players/add', component: <PlayersAddContainer />, label: 'Add players', exactMatch: false, displayMenu:true  },
+        // { path: '/players/edit/:playerId', component: <PlayersAddContainer />, label: 'Add players', exactMatch: false }
+    ])
+
     React.useEffect(() => {
-
-
-        Api.getGames().then(data => {
-            console.log(data["hydra:member"])
-        })
-
-        Api.getTeams().then(data => {
-            console.log(data["hydra:member"])
-        })
+        Api.init()
     }, [])
 
     return (
-    <Layout>
-        <Header className={"header-container"}>
-            <HeaderNavigation changeMenu={clickMenu} />
-        </Header>
-        <Content className={"content-container"}>
-            <Switch>
-                <Route path="/teams">
-                    <TeamsContainer />
-                </Route>
-                <Route path="/players">
-                    <PlayersContainer />
-                </Route>
-                <Route path="/games">
-                    <GamesContainer />
-                </Route>
-            </Switch>
-        </Content>
-        {/*<Footer className={"footer-container"}>*/}
-        {/*    Footer*/}
-        {/*</Footer>*/}
-    </Layout>
-);
+        <Layout>
+            <Header className={"header-container"}>
+                <HeaderNavigation menu={routes} />
+            </Header>
+            <Content className={"content-container"}>
+                <Switch>
+                    {routes && routes.map((route) => {
+                        return (
+                            <Route exact key={route.path} path={route.path}>
+                                {route.component}
+                            </Route>
+                        )
+                    })}
+                </Switch>
+            </Content>
+        </Layout>
+    );
 }
 
 export default AppRoot;

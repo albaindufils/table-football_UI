@@ -1,28 +1,30 @@
 import {Alert, Button, Form, Input} from "antd";
 import React from "react";
-import {playerFormToPlayerJson} from "../../commons/mappers";
+import {playerFormToPlayerJson, teamFormToTeamJson} from "../../commons/mappers";
 import {Api} from "../../services/api";
-import {PlayerJsonld} from "../../commons/model";
+import {PlayerJsonld, TeamJsonld} from "../../commons/model";
 
 interface IProps {
-    updatePlayerList?: () => void
+    updateTeamList : () => void
 }
 
-function PlayersAddContainer(props: IProps) {
+function TeamsAddContainer(props: IProps) {
     const [form] = Form.useForm();
     const [hasError, setHasError] = React.useState(false);
-    const [playerAdded, setPlayerAdded] = React.useState<PlayerJsonld | undefined>();
+    const [teamAdded, setTeamAdded] = React.useState<TeamJsonld | undefined>();
 
     const onFinish = (values: any) => {
-        setPlayerAdded(undefined);
-        Api.addPlayer(playerFormToPlayerJson(values)).then((player) => {
-            setPlayerAdded(player);
+        setTeamAdded(undefined);
+        Api.addTeam(teamFormToTeamJson(values)).then((team:TeamJsonld) => {
+            setTeamAdded(team);
             setHasError(false);
             form.resetFields();
-            props.updatePlayerList && props.updatePlayerList();
+            props.updateTeamList();
         }, error => {
             setHasError(true);
             console.log('response', Object.assign({}, error));
+        }).catch(response => {
+            console.log(response);
         });
         console.log('Success:', values);
     };
@@ -35,7 +37,7 @@ function PlayersAddContainer(props: IProps) {
                 form={form}
             >
                 <Form.Item
-                    label="Player name"
+                    label="Team name"
                     name="name"
                     rules={[{ required: true, message: 'Please insert a name!' }]}
                     initialValue={""}
@@ -48,11 +50,11 @@ function PlayersAddContainer(props: IProps) {
                 </Form.Item>
             </Form>
             {hasError && <Alert message="An error occure with the API." type="error" />}
-            {playerAdded && <Alert message={"The player '" + playerAdded.name + "' has been added with success."} type="success" />}
+            {teamAdded && <Alert message={"The team '" + teamAdded.name + "' has been added with success."} type="success" />}
         </div>
     )
 }
 
-export default PlayersAddContainer;
+export default TeamsAddContainer;
 
 

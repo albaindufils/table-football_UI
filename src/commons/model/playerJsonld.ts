@@ -10,9 +10,10 @@
  * Do not edit the class manually.
  */
 
-export interface PlayerJsonld { 
-    readonly context?: string;
+export interface PlayerJsonld {
+    readonly '@id': string;
     readonly id?: string;
+    readonly context?: string;
     readonly type?: string;
     name?: string;
 }
