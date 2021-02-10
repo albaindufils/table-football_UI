@@ -10,7 +10,8 @@
  * Do not edit the class manually.
  */
 
-export interface TeamJsonld { 
+export interface TeamJsonld {
+    readonly '@id': string;
     readonly context?: string;
     readonly id?: string;
     readonly type?: string;

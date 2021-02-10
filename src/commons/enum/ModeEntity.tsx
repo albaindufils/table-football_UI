@@ -1,4 +1,5 @@
 export enum Mode {
     Create,
-    Edit
+    Edit,
+    Read
 }

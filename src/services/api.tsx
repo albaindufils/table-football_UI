@@ -1,6 +1,6 @@
 import {AxiosInstance, AxiosResponse} from "axios";
 import {AxiosService} from "./axiosService";
-import {HydraGame, HydraPlayer, HydraTeam, PlayerJsonld} from "../commons/model";
+import {HydraGame, HydraPlayer, HydraTeam, PlayerJsonld, TeamJsonld} from "../commons/model";
 
 
 export class ApiService {
@@ -40,8 +40,14 @@ export class ApiService {
         return result.data;
     }
 
-    public async updateTeam(team: any): Promise<PlayerJsonld> {
+    public async updateTeam(team: any): Promise<TeamJsonld> {
         const result = await this.axios.put('/teams/' + team.id, team);
+        return result.data;
+    }
+
+    public async updatePlayer(player: any): Promise<PlayerJsonld> {
+        console.log(player);
+        const result = await this.axios.put('/players/' + player.id, player);
         return result.data;
     }
 

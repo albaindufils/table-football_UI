@@ -1,14 +1,24 @@
+#root {
+  background: #f0f2f5;
+}
 .App {
   height: 100vh;
 }
 
-.header-container { }
-
 .content-container {
-  min-height: 280px;
+  min-height: 500px;
+  height: 100%;
   padding: 24px;
 }
 
-.footer-container {
+.text-center {
+  text-align: center;
+}
 
+.div-center {
+  margin: auto;
+}
+
+.single-container {
+  padding: 50px 120px;
 }
