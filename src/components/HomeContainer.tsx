@@ -3,8 +3,8 @@ import TeamsContainer from "./teams/TeamsContainer";
 import GamesContainer from "./games/GamesContainer";
 import PlayersContainer from "./players/PlayersContainer";
 import {Col, Row} from "antd";
-import {GameJsonld, PlayerJsonld, TeamJsonld} from "../commons/model";
 import {GUTTER} from "../commons/constants";
+import DashboardContainer from "./dashboard/DashboardContainer";
 
 function HomeContainer() {
 
@@ -22,7 +22,14 @@ function HomeContainer() {
                     </Row>
                 </Col>
                 <Col span={14}>
-                    <GamesContainer />
+                    <Row gutter={[GUTTER, GUTTER]}>
+                        <Col span={24}>
+                            <GamesContainer />
+                        </Col>
+                        <Col span={24}>
+                            <DashboardContainer />
+                        </Col>
+                    </Row>
                 </Col>
             </Row>
 

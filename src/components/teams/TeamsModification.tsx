@@ -53,11 +53,11 @@ function TeamsModification(props: IProps) {
             notifyApp("Create team", "The team (" + team.name + ") n°" + team.id + " has been successfully created");
             setCreationLoading(false);
         }, (error) => {
-            handleError(error);
             setCreationLoading(false);
+            handleError(error);
         })
-        console.log('Success:', values);
     };
+
     const onFinishFailed = (values: any) => {
         console.log('Failed:', values);
     };
@@ -87,8 +87,8 @@ function TeamsModification(props: IProps) {
                 >
                     <Input />
                 </Form.Item>
-                <PlayersSelect initialValue={""} players={players} name={"player1"} required={true} title={"Player 1"} />
-                <PlayersSelect initialValue={""} players={players} name={"player2"} required={false} title={"Player 2"} />
+                <PlayersSelect initialValue={props.team?.player1?.["@id"]} players={players} name={"player1"} required={true} title={"Player 1"} />
+                <PlayersSelect initialValue={props.team?.player2?.["@id"]} players={players} name={"player2"} required={false} title={"Player 2"} />
                 <Form.Item {...FORM_BUTTON_LAYOUT}>
                     <Button loading={creationLoading} type="primary" htmlType="submit">{props.mode === Mode.Create ? 'Add a new team': 'Edit team' }</Button>
                 </Form.Item>

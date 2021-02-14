@@ -1,5 +1,5 @@
 import { Menu } from "antd";
-import {Link, useLocation} from "react-router-dom";
+import {NavLink, useLocation} from "react-router-dom";
 import {IRoutes} from "../../AppRoot";
 
 interface IProps {
@@ -8,10 +8,10 @@ interface IProps {
 
 function HeaderNavigation(props: IProps) {
     return (
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={[useLocation().pathname]}>
+        <Menu theme="dark" mode="horizontal" selectedKeys={[useLocation().pathname]}>
             {props.menu && props.menu.map((m) =>
             {
-                return m.displayMenu && <Menu.Item key={m.path}><Link to={m.path}>{m.label}</Link></Menu.Item>
+                return m.displayMenu && <Menu.Item key={m.path}><NavLink to={m.path} activeClassName={"select"}>{m.label}</NavLink></Menu.Item>
             }
             )}
         </Menu>

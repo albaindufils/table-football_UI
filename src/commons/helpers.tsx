@@ -6,7 +6,6 @@ export function notifyApp(title: string, message: string, type: NotificationType
     notification[type]({
         message: title,
         description: message,
-
         duration: 5
     });
 }

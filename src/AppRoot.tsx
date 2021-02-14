@@ -8,6 +8,8 @@ import HomeContainer from "./components/HomeContainer";
 import TeamsContainer from "./components/teams/TeamsContainer";
 import GamesContainer from "./components/games/GamesContainer";
 import PlayersContainer from "./components/players/PlayersContainer";
+import TeamsStatistics from "./components/teams/TeamsStatistics";
+import DashboardContainer from "./components/dashboard/DashboardContainer";
 
 export interface IRoutes {
     component: any,
@@ -22,9 +24,11 @@ function AppRoot() {
 
     const [routes] = React.useState<IRoutes[]>([
         { path: '/', component: <HomeContainer /> , label: 'Home', exactMatch: true, displayMenu:true },
+        { path: '/dashboard', component: <div className={"single-container"}><DashboardContainer /></div>, label: 'Ranking', exactMatch: true, displayMenu: true },
         { path: '/players', component: <div className={"single-container"}><PlayersContainer /></div>, label: 'Players', exactMatch: true, displayMenu:true },
         { path: '/teams', component: <div className={"single-container"}><TeamsContainer  /></div>, label: 'Teams', exactMatch: true, displayMenu:true },
-        { path: '/games', component: <div className={"single-container"}><GamesContainer /></div>, label: 'Games', exactMatch: true, displayMenu:true }
+        { path: '/games', component: <div className={"single-container"}><GamesContainer /></div>, label: 'Games', exactMatch: true, displayMenu:true },
+        { path: '/teams/stats', component: <div className={"single-container"}><TeamsStatistics /></div>, label: 'Comparison', exactMatch: false, displayMenu: true },
     ])
 
     React.useEffect(() => {

@@ -7,13 +7,15 @@ export const REQUEST_TIMEOUT = 5000;
 
 export const GUTTER = 8;
 
+export const TABLE_DEFAULT_SIZE = 500;
+
 export const FORM_LAYOUT = {
-    labelCol: { span: 4 },
-    wrapperCol: { span: 20 },
+    labelCol: { span: 6 },
+    wrapperCol: { span: 18 },
 };
 
 export const FORM_BUTTON_LAYOUT = {
-    wrapperCol: { offset: 4, span: 20 },
+    wrapperCol: { offset: 6, span: 18 },
 }
 
 export const MAX_SCORE = 7;
