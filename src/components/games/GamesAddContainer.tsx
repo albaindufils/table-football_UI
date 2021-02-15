@@ -17,7 +17,6 @@ interface IProps extends IActionContainer {
 function GamesAddContainer(props: IProps) {
     const [form] = Form.useForm();
     const [loading, setIsLoading] = React.useState(false);
-    const [sameTeam, setIsSameTeam] = React.useState(false);
 
     const formHasError = ():boolean => {
         let hasError = false

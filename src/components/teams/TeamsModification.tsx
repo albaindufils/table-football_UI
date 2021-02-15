@@ -1,7 +1,7 @@
 import React from "react";
 
 import {PlayerJsonld, TeamJsonld} from "../../commons/model";
-import {Button, Form, Input, Select, Spin} from "antd";
+import {Button, Form, Input, Spin} from "antd";
 import {Api} from "../../services/api";
 import './Teams.css';
 import {Mode} from "../../commons/enum/ModeEntity";

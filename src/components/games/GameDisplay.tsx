@@ -17,7 +17,7 @@ interface IProps extends IActionContainer {
 }
 
 function GameDisplay(props: IProps) {
-    const [game, setGame] = React.useState<GameJsonld>(props.game);
+    const [game] = React.useState<GameJsonld>(props.game);
     const [scoreHome, setScoreHome] = React.useState(props.game.scoreHome);
     const [scoreAway, setScoreAway] = React.useState(props.game.scoreAway);
     const [teamHomeId, setTeamHomeId] = React.useState(props.game.teamHome["@id"]);

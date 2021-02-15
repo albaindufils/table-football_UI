@@ -3,7 +3,6 @@ import {MinusOutlined, PlusOutlined} from "@ant-design/icons";
 import React from "react";
 import {Mode} from "../enum/ModeEntity";
 import {MAX_SCORE} from "../constants";
-import {Spin} from "antd/es";
 
 
 interface IProps {
@@ -14,10 +13,8 @@ interface IProps {
 }
 
 function Score(props: IProps) {
-    // const [score, setScore] = React.useState(props.score);
-
     const addScore = () => {
-        if(props.score < 7) {
+        if(props.score < MAX_SCORE) {
             props.updateScore(props.score + 1);
         }
     }

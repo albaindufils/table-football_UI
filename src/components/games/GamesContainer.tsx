@@ -4,7 +4,6 @@ import {GameJsonld, TeamJsonld} from "../../commons/model";
 import {Card, Modal, Table} from "antd";
 import {PlusOutlined, ReloadOutlined} from "@ant-design/icons"
 import {Api} from "../../services/api";
-import './Games.css';
 import {formatDatetime, handleError} from "../../commons/helpers";
 import GameDisplay from "./GameDisplay";
 import {Mode} from "../../commons/enum/ModeEntity";

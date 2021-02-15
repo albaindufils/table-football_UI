@@ -14,7 +14,6 @@ export function teamFormToTeamJson(teamForm: any) {
         player1 : teamForm.player1,
         player2: teamForm.player2 === '' ? null : teamForm.player2
     }
-    console.log(team, teamForm);
     return team;
 }
 
@@ -27,6 +26,5 @@ export function gameFormToGameJson(gameForm: any) {
         scoreAway: Number(gameForm.scoreAway),
         scoreHome: Number(gameForm.scoreHome)
     }
-    console.log(gameForm, game)
     return game;
 }

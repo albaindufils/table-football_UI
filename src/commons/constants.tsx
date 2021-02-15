@@ -18,4 +18,4 @@ export const FORM_BUTTON_LAYOUT = {
     wrapperCol: { offset: 6, span: 18 },
 }
 
-export const MAX_SCORE = 7;
+export const MAX_SCORE = 10;

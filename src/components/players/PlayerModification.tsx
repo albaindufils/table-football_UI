@@ -37,7 +37,7 @@ function PlayerModification(props: IProps) {
     };
 
     const handleModifyPlayer = (player: any) => {
-        props.mode == Mode.Create && form.resetFields();
+        props.mode === Mode.Create && form.resetFields();
         // Callbacks call for update parent
         props.callbackModalVisibility && props.callbackModalVisibility(false)
         props.updateParentList && props.updateParentList();
