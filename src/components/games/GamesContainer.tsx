@@ -29,17 +29,17 @@ function GamesContainer() {
 
     React.useEffect(() => {
         updateGames();
-        Api.getTeams().then(data => {
-            setTeams(data["hydra:member"]);
-        }, error => {
-            handleError(error)
-        });
     }, [])
 
 
 
     const updateGames = () => {
         setIsLoading(true);
+        Api.getTeams().then(data => {
+            setTeams(data["hydra:member"]);
+        }, error => {
+            handleError(error)
+        });
         Api.getGames().then(data => {
             setGames(data["hydra:member"].sort((g1, g2) => (g2.id as any) - (g1.id as any)));
             setSelectedGame(games?.filter(x => x.id === selectedGame?.id)[0]);
@@ -50,7 +50,7 @@ function GamesContainer() {
 
     const renderAddContainer = () => <div>
         <a onClick={() => updateGames()}><ReloadOutlined style={{fontSize:"20px"}} /></a>
-        <a onClick={() => setIsModalOpen(true)}><PlusOutlined style={{fontSize:"20px"}} /> Start new game</a>
+        <a onClick={() => {updateGames(); setIsModalOpen(true);}}><PlusOutlined style={{fontSize:"20px"}} /> Start new game</a>
         <Modal title="Create a new game" footer={null} visible={isModalOpen} onCancel={() => setIsModalOpen(false)} destroyOnClose={true}>
             <GamesAddContainer teams={teams} updateParentList={updateGames} callbackModalVisibility={setIsModalOpen} mode={Mode.Create}  />
         </Modal>
