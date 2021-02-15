@@ -23,6 +23,7 @@ This web application is used to monitor the internal football table championship
 - [ ] Unit test the application
 - [ ] Mercure support for live data updates
 - [ ] Multiple championship management (ex: 2020, 2021, ...)
+- [ ] Docker run file
 
 ## How to run ths project
 
