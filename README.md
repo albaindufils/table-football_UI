@@ -43,3 +43,10 @@ yarn install
 
 2) Then, run the application : ` yarn start ` 
 3) Navigate to [http://localhost:3000](http://localhost:3000)
+4) Populate database
+    1) Create a player
+    ![player-add](./images/01-player-add.png "Player add card")
+    2) Create a team
+    ![team-add](./images/02-team-add.png "Team add card")
+    3) Create a game and play! :)
+    ![game-add](./images/03-game-add.png "Game add card")
