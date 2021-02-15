@@ -8,7 +8,7 @@ import HomeContainer from "./components/HomeContainer";
 import TeamsContainer from "./components/teams/TeamsContainer";
 import GamesContainer from "./components/games/GamesContainer";
 import PlayersContainer from "./components/players/PlayersContainer";
-import TeamsStatistics from "./components/teams/TeamsStatistics";
+import TeamsStatistics from "./components/stats/StatisticsContainer";
 import DashboardContainer from "./components/dashboard/DashboardContainer";
 
 export interface IRoutes {
@@ -28,7 +28,7 @@ function AppRoot() {
         { path: '/players', component: <div className={"single-container"}><PlayersContainer /></div>, label: 'Players', exactMatch: true, displayMenu:true },
         { path: '/teams', component: <div className={"single-container"}><TeamsContainer  /></div>, label: 'Teams', exactMatch: true, displayMenu:true },
         { path: '/games', component: <div className={"single-container"}><GamesContainer /></div>, label: 'Games', exactMatch: true, displayMenu:true },
-        { path: '/teams/stats', component: <div className={"single-container"}><TeamsStatistics /></div>, label: 'Comparison', exactMatch: false, displayMenu: true },
+        { path: '/stats/:type/:id', component: <div className={"single-container"}><TeamsStatistics /></div>, label: 'Comparison', exactMatch: false, displayMenu: false },
     ])
 
     React.useEffect(() => {

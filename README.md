@@ -1,46 +1,44 @@
-# Getting Started with Create React App
+# Table Football Coding Challenge
+![dashboard-1](./images/dashboard-1.png "Dashboard #1")
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![dashboard-2](./images/dashboard-2.png "Dashboard deployed #2")
 
-## Available Scripts
+## Introduction
+This web application is used to monitor the internal football table championship.
 
-In the project directory, you can run:
+### Used packages
+- React: v17.0.1
+- antd: v4.12.2
+- axios: v0.21.1
 
-### `yarn start`
+## User stories
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- [x] US#1 : As a user, I want to start a new game between two teams so that I can keep track of score as the game is being played.
+- [x] US#2 : As a user, I want to create a game that has already been played so that I can enter the result of that game.
+- [x] US#3 : As a user, I want to be able to create teams with one or two players so that I can reuse the teams when I create new games.
+- [x] US#4 : As a user, I want to see a dashboard with team and individual player statistics so that I can see who is the ultimate champion.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Improvements
 
-### `yarn test`
+- [ ] Unit test the application
+- [ ] Mercure support for live data updates
+- [ ] Multiple championship management (ex: 2020, 2021, ...)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## How to run ths project
 
-### `yarn build`
+All the dependencies are available in the `package.json` file.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Before all, you need to install [node.js](https://nodejs.org/en/) and [Yarn](https://classic.yarnpkg.com/en/docs/install/). 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Be aware to run the api first :  [table-football_API](https://github.com/albaindufils/table-football_API)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1) Clone the repository, and install packages : 
 
-### `yarn eject`
+```
+git clone https://github.com/albaindufils/table-football_UI.git
+cd table-football_UI
+yarn install 
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+2) Then, run the application : ` yarn start ` 
+3) Navigate to [http://localhost:3000](http://localhost:3000)

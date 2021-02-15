@@ -1,7 +1,6 @@
 import React from "react";
 import {IActionContainer} from "../../commons/interfaces/IActionContainer";
 import {FORM_BUTTON_LAYOUT, FORM_LAYOUT, MAX_SCORE} from "../../commons/constants";
-import {Mode} from "../../commons/enum/ModeEntity";
 import {Button, DatePicker, Form, Input} from "antd";
 import TeamsSelect from "../teams/TeamsSelect";
 import {TeamJsonld} from "../../commons/model";
@@ -9,6 +8,7 @@ import {Api} from "../../services/api";
 import {handleError, notifyApp} from "../../commons/helpers";
 import moment from "moment";
 import {gameFormToGameJson} from "../../commons/mappers";
+import {NotificationType} from "../../commons/enum/NotificationType";
 
 interface IProps extends IActionContainer {
     teams: TeamJsonld[]
@@ -16,19 +16,31 @@ interface IProps extends IActionContainer {
 
 function GamesAddContainer(props: IProps) {
     const [form] = Form.useForm();
-    const [loading, setIsLoading] = React.useState(false)
+    const [loading, setIsLoading] = React.useState(false);
+    const [sameTeam, setIsSameTeam] = React.useState(false);
+
+    const formHasError = ():boolean => {
+        let hasError = false
+        if(form.getFieldValue('teamHome') === form.getFieldValue('teamAway')) {
+            notifyApp("Form error", "Teams are the same. Please correct teams you selected!", NotificationType.warning);
+            hasError = true;
+        }
+        return hasError;
+    }
 
     const onFinish = (values: any) => {
-        setIsLoading(true);
-        Api.addGame(gameFormToGameJson(values)).then((game) => {
-            notifyApp("Game created", "The game n°" + game.id + " has been successfully created!");
-            setIsLoading(false);
-            props.updateParentList();
-            props.callbackModalVisibility && props.callbackModalVisibility(false);
-        }, error => {
-            handleError(error);
-            setIsLoading(false);
-        })
+        if(!formHasError()) {
+            setIsLoading(true);
+            Api.addGame(gameFormToGameJson(values)).then((game) => {
+                notifyApp("Game created", "The game n°" + game.id + " has been successfully created!");
+                setIsLoading(false);
+                props.updateParentList();
+                props.callbackModalVisibility && props.callbackModalVisibility(false);
+            }, error => {
+                handleError(error);
+                setIsLoading(false);
+            })
+        }
     }
     const controlForm = (form:any) => {
         console.log(form);
@@ -47,7 +59,7 @@ function GamesAddContainer(props: IProps) {
                 rules={[{ required: true }]}
                 initialValue={moment()}
             >
-                <DatePicker showTime format={'DD/MM/YYYY, HH:mm'} />
+                <DatePicker showTime format={'DD/MM/YYYY, HH:mm'} disabledDate={(value) => value > form.getFieldValue('datetime')} />
             </Form.Item>
             <Form.Item
                 label={"Team home"}

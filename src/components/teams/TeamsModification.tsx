@@ -10,6 +10,7 @@ import {handleError, notifyApp} from "../../commons/helpers";
 import {FORM_BUTTON_LAYOUT, FORM_LAYOUT} from "../../commons/constants";
 import {IActionContainer} from "../../commons/interfaces/IActionContainer";
 import PlayersSelect from "../players/PlayersSelect";
+import {NotificationType} from "../../commons/enum/NotificationType";
 
 
 interface IProps extends IActionContainer {
@@ -33,34 +34,44 @@ function TeamsModification(props: IProps) {
     },[props.team])
 
     const onUpdate = (values: any) => {
-        setCreationLoading(true)
-        Api.updateTeam(teamFormToTeamJson(values)).then((team) => {
-            props.updateParentList();
-            notifyApp("Update team (#" + team.id + ")", "The teams '" + team.name + "' has been successfully updated");
-            setCreationLoading(false);
-        }, (error) => {
-            handleError(error);
-            setCreationLoading(false);
-        })
-        console.log('Success:', values);
+        if(!formHasError()) {
+            setCreationLoading(true)
+            Api.updateTeam(teamFormToTeamJson(values)).then((team) => {
+                props.updateParentList();
+                notifyApp("Update team (#" + team.id + ")", "The teams '" + team.name + "' has been successfully updated");
+                setCreationLoading(false);
+            }, (error) => {
+                handleError(error);
+                setCreationLoading(false);
+            })
+        }
+
     };
     const onCreate = (values: any) => {
-        setCreationLoading(true)
-        Api.addTeam(teamFormToTeamJson(values)).then((team) => {
-            props.updateParentList();
-            form.resetFields();
-            props.callbackModalVisibility && props.callbackModalVisibility(false)
-            notifyApp("Create team", "The team (" + team.name + ") n°" + team.id + " has been successfully created");
-            setCreationLoading(false);
-        }, (error) => {
-            setCreationLoading(false);
-            handleError(error);
-        })
+        if(!formHasError()) {
+            setCreationLoading(true);
+            Api.addTeam(teamFormToTeamJson(values)).then((team) => {
+                props.updateParentList();
+                form.resetFields();
+                props.callbackModalVisibility && props.callbackModalVisibility(false)
+                notifyApp("Create team", "The team (" + team.name + ") n°" + team.id + " has been successfully created");
+                setCreationLoading(false);
+            }, (error) => {
+                setCreationLoading(false);
+                handleError(error);
+            })
+        }
     };
 
-    const onFinishFailed = (values: any) => {
-        console.log('Failed:', values);
-    };
+    const formHasError = ():boolean => {
+        let hasError = false
+        if(form.getFieldValue('player1') === form.getFieldValue('player2')) {
+            notifyApp("Form error", "Player1 and player2 are the same. Please correct players you selected!", NotificationType.warning);
+            hasError = true;
+        }
+        return hasError;
+    }
+
     return (
         <div>
         {isLoading
@@ -69,7 +80,6 @@ function TeamsModification(props: IProps) {
             <Form
                 {...FORM_LAYOUT}
                 onFinish={props.mode === Mode.Create ? onCreate : onUpdate}
-                onFinishFailed={onFinishFailed}
                 form={form}
             >
                 {props.mode === Mode.Edit && <Form.Item

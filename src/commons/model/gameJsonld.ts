@@ -15,7 +15,7 @@ export interface GameJsonld {
     readonly context?: string;
     readonly type?: string;
     readonly id?: number;
-    readonly '@id': string;
+    readonly '@id'?: string;
     datetime?: String;
     scoreHome: number;
     scoreAway: number;

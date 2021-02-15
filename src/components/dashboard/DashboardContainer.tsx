@@ -5,6 +5,7 @@ import {TeamJsonld} from "../../commons/model";
 import {TABLE_DEFAULT_SIZE} from "../../commons/constants";
 import {Api} from "../../services/api";
 import {ReloadOutlined} from "@ant-design/icons";
+import {handleError} from "../../commons/helpers";
 
 
 function DashboardContainer() {
@@ -19,6 +20,8 @@ function DashboardContainer() {
         setIsLoading(true);
         Api.getStat().then((data) => {
             setData(data);
+        }, error => {
+            handleError(error);
         }).finally(() => {
             setIsLoading(false);
         })

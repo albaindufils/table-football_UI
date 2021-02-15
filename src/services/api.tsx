@@ -56,9 +56,20 @@ export class ApiService {
     }
 
     public async getStat(): Promise<any> {
-        const result = await this.GET("/team_ranking");
-        return result;
+        return await this.GET("/team_ranking");
     }
+
+    public async getGamesByPlayer(id: number): Promise<any> {
+        return await this.GET("/players/" + id + "/games");
+    }
+
+    public async getGamesByTeam(id: number): Promise<any> {
+        return await this.GET("/teams/" + id + "/games");
+    }
+
+
+
+
 
 }
 

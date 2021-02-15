@@ -12,6 +12,15 @@ import GamesAddContainer from './GamesAddContainer';
 import {ColumnsType} from "antd/es/table";
 import {TABLE_DEFAULT_SIZE} from "../../commons/constants";
 
+
+const tableColumnGames: ColumnsType<GameJsonld> = [
+    { title: "ID", key:"id", dataIndex:"id", width:50},
+    { title: "Date/time", key:"datetime", dataIndex:"datetime", render: (text, record) => formatDatetime(record.datetime), ellipsis: true},
+    { title: "Home team", key:"teamHome", dataIndex:"teamHome", align:"center", render: (text, record) => record.teamHome.id + ' - ' + record.teamHome.name, ellipsis: true },
+    { title: "Home score", key:"scoreHome", dataIndex:"scoreHome", align:"center", ellipsis: true},
+    { title: "Away score", key:"scoreAway", dataIndex:"scoreAway", align:"center", ellipsis: true },
+    { title: "Away team", key:"teamAway", dataIndex:"teamAway", align:"center", render: (text, record) => record.teamAway.id + ' - ' + record.teamAway.name, ellipsis: true }
+]
 function GamesContainer() {
     const [games, setGames] = React.useState<GameJsonld[]>();
     const [teams, setTeams] = React.useState<TeamJsonld[]>([]);
@@ -28,14 +37,7 @@ function GamesContainer() {
         });
     }, [])
 
-    const tableColumn: ColumnsType<GameJsonld> = [
-        { title: "ID", key:"id", dataIndex:"id", width:50},
-        { title: "Date/time", key:"datetime", dataIndex:"datetime", render: (text, record) => formatDatetime(record.datetime), ellipsis: true},
-        { title: "Home team", key:"teamHome", dataIndex:"teamHome", align:"center", render: (text, record) => record.teamHome.id + ' - ' + record.teamHome.name, ellipsis: true },
-        { title: "Home score", key:"scoreHome", dataIndex:"scoreHome", align:"center", ellipsis: true},
-        { title: "Away score", key:"scoreAway", dataIndex:"scoreAway", align:"center", ellipsis: true },
-        { title: "Away team", key:"teamAway", dataIndex:"teamAway", align:"center", render: (text, record) => record.teamAway.id + ' - ' + record.teamAway.name, ellipsis: true }
-    ]
+
 
     const updateGames = () => {
         setIsLoading(true);
@@ -61,14 +63,11 @@ function GamesContainer() {
             loading={!games}
             extra={renderAddContainer()}
         >
-            {/*<div>*/}
-            {/*    {selectedGame && <GameDisplay key={"display-game-" + selectedGame?.id} game={selectedGame} teams={teams} updateParentList={updateGames} mode={Mode.Read} />}*/}
-            {/*</div>*/}
             <Table
                 key={'table-players'}
                 rowKey={'id'}
                 size={"small"}
-                columns={tableColumn}
+                columns={tableColumnGames}
                 dataSource={games}
                 loading={isLoading}
                 scroll={{y: TABLE_DEFAULT_SIZE}}

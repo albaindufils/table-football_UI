@@ -2,7 +2,7 @@ import React from "react";
 
 import {TeamJsonld} from "../../commons/model";
 import {Card, Modal, Table} from "antd";
-import {PlusOutlined, ReloadOutlined} from '@ant-design/icons';
+import {PlusOutlined, ReloadOutlined, FundOutlined} from '@ant-design/icons';
 import {Api} from "../../services/api";
 import {ColumnsType} from "antd/es/table";
 import TeamsModification from "./TeamsModification";
@@ -35,7 +35,7 @@ function TeamsContainer() {
         return (
             <div>
                 <a onClick={() => updateTeamList()}><ReloadOutlined style={{fontSize:"20px"}} /></a>
-                <a href="#"><PlusOutlined style={{fontSize:"20px"}}  onClick={() => setIsModal(true)} /></a>
+                <a onClick={() => setIsModal(true)}><PlusOutlined style={{fontSize:"20px"}} /></a>
                 <Modal title="Create a new team" footer={null} visible={isModal} onCancel={() => setIsModal(false)} destroyOnClose={true}>
                     <TeamsModification updateParentList={updateTeamList} callbackModalVisibility={setIsModal} mode={Mode.Create} />
                 </Modal>
@@ -55,7 +55,7 @@ function TeamsContainer() {
             render: (text, record) => {
                 return (
                     <div>
-                        <Link to={'/teams/' + record.id + '/stats/'}>{'>'}</Link>
+                        <Link to={'/stats/teams/' + record.id }><FundOutlined /></Link>
                     </div>
                 )
             }

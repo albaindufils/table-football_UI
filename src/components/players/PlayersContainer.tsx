@@ -4,11 +4,12 @@ import {PlayerJsonld} from "../../commons/model";
 import {Card, Modal, Table} from "antd";
 import {Api} from "../../services/api";
 import {ColumnsType} from "antd/es/table";
-import {PlusOutlined, ReloadOutlined} from "@ant-design/icons";
+import {PlusOutlined, ReloadOutlined, FundOutlined} from "@ant-design/icons";
 import {Mode} from "../../commons/enum/ModeEntity";
 import {handleError} from "../../commons/helpers";
 import PlayerModification from "./PlayerModification";
 import {TABLE_DEFAULT_SIZE} from "../../commons/constants";
+import {Link} from "react-router-dom";
 
 function PlayersContainer() {
     const [players, setPlayers] = React.useState<PlayerJsonld[]>();
@@ -42,7 +43,19 @@ function PlayersContainer() {
 
     const tableColumn: ColumnsType<PlayerJsonld> = [
         { title: "ID", key:"id", dataIndex:"id", width: 70, sorter: (a, b) => (a.id as any) - (b.id as any), defaultSortOrder:'descend'},
-        { title: "Name", key:"name", dataIndex:"name"}
+        { title: "Name", key:"name", dataIndex:"name"},
+        {
+            title: "Statistics",
+            key:"action",
+            width: 100,
+            render: (text, record) => {
+                return (
+                    <div>
+                        <Link to={'/stats/players/' + record.id}><FundOutlined /></Link>
+                    </div>
+                )
+            }
+        }
     ];
 
     return (
